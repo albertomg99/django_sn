@@ -1,0 +1,24 @@
+<!--AMGTeer/templates/AMGTeer/register.html-->
+{% extends "base.html" %}
+{% block content %}
+    <div class="column is-one-fifth"></div>
+    <div class="column">
+        <section class="hero is-info">
+            <h2 class="title">Register</h2>
+            <div class="hero-body">
+                <div class="container">
+                    <div class="columns is-centered">
+                        <div class="column is-5-tablet is-4-desktop is-3-widescreen">
+                            <form method="post">
+                                {% csrf_token %}
+                                {{ form }}
+                                <input type="submit" value="Register">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="column is-one-fifth"></div>
+{% endblock content %}

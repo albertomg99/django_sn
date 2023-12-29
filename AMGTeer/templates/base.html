@@ -11,15 +11,36 @@
         <!-- Include the Bulma CSS framework for styling -->
         <link rel="stylesheet"
               href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+        <style>
+            label, input {
+                display: block;
+            }
+            span.helptext {
+                display: none;
+            }
+        </style>
     </head>
     <body>
-        <a href="{% url 'AMGTeer:dashboard' %} ">
-            <section class="hero is-small is-info mb-4">
+        <section class="hero is-small is-info mb-4">
+            <a href="{% url 'AMGTeer:dashboard' %} ">
                 <div class="hero-body">
                     <h1 class="title is-1 has-text-centered	">AMGTeer</h1>
                 </div>
-            </section>
-        </a>
+            </a>
+            <div class="columns is-full">
+                <div class="column is-half">
+                    <a href="{% url 'AMGTeer:profile' request.user.profile.id %} ">Hello, {{ user.username|default:'Guest' }}</a>
+                </div>
+                <div class="column is-half has-text-right">
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'AMGTeer:logout' %}">Logout</a>
+                    {% else %}
+                        <a href="{% url 'AMGTeer:login' %}">Login</a> /
+                        <a href="{% url 'AMGTeer:register' %}">New User</a>
+                    {% endif %}
+                </div>
+            </div>
+        </section>
         <div class="container">
             <div class="columns">
                 {% block content %}
