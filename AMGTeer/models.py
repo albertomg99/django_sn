@@ -21,3 +21,16 @@ def create_profile(sender, instance, created, **kwargs):
         user_profile.save()
         user_profile.follows.set([instance.profile.id])
         user_profile.save()
+
+
+class AMGPost(models.Model):
+    user = models.ForeignKey(User, related_name="posts", on_delete=models.DO_NOTHING)
+    body = models.CharField(max_length=200)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self) -> str:
+        return (
+            f"{self.user} "
+            f"({self.created_at:%Y-%m-%d %H:%M}): "
+            f"{self.body[:30]}..."
+        )
